@@ -12,13 +12,15 @@ module.exports.writeInfo = function writeInfo(steamApiKey) {
     console.log("\r");
 };
 
-module.exports.getApiKey = function getApiKey() {
-    console.log("\x1b[36m", "If you want to use in-Discord invites, go to http://127.0.0.1:3000/home (this window should open automatically).");
+module.exports.getApiKey = function getApiKey(silent = false) {
+    console.log("\x1b[36m", "If you want to use in-Discord invites, go to http://127.0.0.1:3000/home (this window should open automatically, unless --silent was specified).");
     console.log("\r");
-    try {
-        var startCommand = process.platform == "win32" ? "start" : "xdg-open";
-        childProcess.exec(
-            startCommand + " http://127.0.0.1:3000/home"
-        );
-    } catch (e) {}
+    if (!silent) {
+        try {
+            var startCommand = process.platform == "win32" ? "start" : "xdg-open";
+            childProcess.exec(
+                startCommand + " http://127.0.0.1:3000/home"
+            );
+        } catch (e) {}
+    }
 };

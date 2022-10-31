@@ -17,6 +17,7 @@ const path = require("path");
 const mustacheExpress = require("mustache-express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
+const silentMode = process.argv.includes("--silent")
 
 app.engine("html", mustacheExpress());
 app.set("view engine", "html");
@@ -97,5 +98,5 @@ async function onData(data) {
 
 cli.writeInfo(steamApiKey);
 if (steamApiKey.length != 32) {
-    cli.getApiKey();
+    cli.getApiKey(silentMode);
 }
